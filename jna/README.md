@@ -1,1 +1,1 @@
-go build -buildmode=c-shared -o gojnalib.so gojnalib.go
+`go build -buildmode=c-shared -o gojnalib.so gojnalib.go`
