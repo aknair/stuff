@@ -38,7 +38,7 @@ public class JavaJNAGoClient {
   }
 
   public static void main(String[] args) throws Exception {
-    GoLib goLib = (GoLib) Native.loadLibrary("/Users/owner/dev/github.com/aknair/stuff/jna/gojnalib.so",
+    final GoLib goLib = (GoLib) Native.loadLibrary("/Users/owner/dev/github.com/aknair/stuff/jna/gojnalib.so",
         GoLib.class);
 
     int numThreads = 10;
