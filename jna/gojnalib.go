@@ -24,8 +24,8 @@ func GetGoInt() int {
 //export EncryptMessage
 func EncryptMessage(key, message string) *C.char {
 
-	fmt.Println("Key from Java is", key)
-
+	fmt.Printf("Key from Java is %v", key)
+	fmt.Println(" & Message length is", len(message))
 	block, err := aes.NewCipher([]byte(key))
 	if err != nil {
 		fmt.Println("NewCipher", err)
@@ -40,7 +40,7 @@ func EncryptMessage(key, message string) *C.char {
 		fmt.Println("GCM", err)
 	}
 	ciphertext := gcm.Seal(nil, nonce, []byte(message), nil)
-	fmt.Printf("Returning %s as %x (base 16 encoded) from Java\n", ciphertext, ciphertext)
+	// fmt.Printf("Returning %s as %x (base 16 encoded) from Java\n", ciphertext, ciphertext)
 	return C.CString(fmt.Sprintf("%x", ciphertext))
 }
 
