@@ -40,7 +40,7 @@ public class JavaJNAGoClient {
     GoLib goLib = (GoLib) Native.loadLibrary("/Users/owner/dev/github.com/aknair/stuff/jna/gojnalib.so",
         GoLib.class);
 
-    int numThreads = 8;
+    int numThreads = 2;
     int numIterations = 1000000;
     ExecutorService executor = Executors.newFixedThreadPool(numThreads);
     long startTime = System.nanoTime();
@@ -73,8 +73,8 @@ public class JavaJNAGoClient {
     executor.shutdown();
     executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
     long elapsedTime = System.nanoTime() - startTime;
-    double elapsedTimeInMicroSeconds = (double) elapsedTime / 1000000;
-    System.out.printf("Total elapsed time: %.3f microseconds%n", elapsedTimeInMicroSeconds);
+    double elapsedTimeMs = (double) elapsedTime / 1000000;
+    System.out.printf("Total elapsed time: %.2f milliseconds%n", elapsedTimeMs);
 
   }
 }
