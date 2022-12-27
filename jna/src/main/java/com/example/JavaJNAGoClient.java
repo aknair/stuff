@@ -33,6 +33,7 @@ public class JavaJNAGoClient {
     String GetGoString();
 
     int GetGoInt();
+    int LenMap();
 
     String EncryptMessage(GoString.ByValue key, GoString.ByValue message);
   }
@@ -80,6 +81,7 @@ public class JavaJNAGoClient {
     executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
     long elapsedTime = System.nanoTime() - startTime;
     double elapsedTimeMs = (double) elapsedTime / 1000000;
+    System.out.println("Number of unique string lengths is "+goLib.LenMap());
     System.out.printf("Total elapsed time: %.2f milliseconds%n", elapsedTimeMs);
 
   }

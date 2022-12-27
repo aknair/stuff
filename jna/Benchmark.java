@@ -15,8 +15,8 @@ public class Benchmark {
     System.out.println("Thread id : "+Thread.currentThread().getName()+" elapsed time is "+elapsedTime/1000 + " microseconds");    
   }
   public static void main(String[] args) throws Exception {
-    int numThreads = 4; 
-    int numIterations = 10; 
+    int numThreads = 100; 
+    int numIterations = 1000000; 
     ExecutorService executor = Executors.newFixedThreadPool(numThreads);
     long startTime = System.nanoTime();
     for (int i = 0; i < numIterations; i++) {
