@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>How can I help you?</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+		body {
+			background-color: #0D2C54;
+			color: #fff;
+			font-family: Helvetica, Arial, sans-serif;
+		}
+
+		h1 {
+			text-align: center;
+			margin-top: 50px;
+		}
+
+		.container {
+			margin: 50px auto;
+			max-width: 600px;
+			text-align: center;
+		}
+
+		.textarea {
+			width: 100%;
+			height: 200px;
+			padding: 10px;
+			margin: 10px 0;
+			border-radius: 5px;
+			border: 5x solid;
+			resize: none;
+			font-size: 16px;
+			line-height: 1.5;
+			background-color: #1E5F9C;
+			color: #fff;
+			box-shadow: 0px 0 px 10px rgba(255, 255, 255, 0.1);
+		}
+
+		.btn {
+			display: inline-block;
+			padding: 10px 20px;
+			margin: 10px 0;
+			border-radius: 5px;
+			border: 5x solid;
+			background-color: #fff;
+			color: #0D2C54;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+		}
+
+		.btn:hover {
+			background-color: #1E5F9C;
+			color: #fff;
+		}
+
+		.output {
+			margin-top: 20px;
+			padding: 20px;
+			border-radius: 5px;
+			background-color: #1E5F9C;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+			text-align: left;
+			font-family: "Courier New", Courier, monospace;
+			position: relative;
+		}
+
+		.copy-btn {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			padding: 5px 10px;
+			border-radius: 5px;
+			background-color: #fff;
+			color: #0D2C54;
+			font-size: 14px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+		}
+
+		.copy-btn:hover {
+			background-color: #1E5F9C;
+			color: #fff;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Yes Master!</h1>
+	<div class="container">
+		<textarea id="input-text" class="textarea" placeholder="Enter text here..."></textarea>
+		<button id="submit-btn" class="btn">Your wish is my command</button>
+		<div id="output" class="output"></div>
+
+		<script>
+			$(document).ready(function () {
+				$("#submit-btn").click(function () {
+					var inputData = $("#input-text").val();
+					var data = JSON.stringify({
+						"input": inputData
+					});
+					$.ajax({
+						url: "https://appspot.com",
+						type: "POST",
+						contentType: "application/json",
+						data: data,
+						dataType: "text",
+						success: function (response) {
+							var content = response.replace(/\n/g, "<br>");
+							$("#output").html("<p>" + content + "</p>");
+							addCopyButton();
+						},
+						error: function (xhr, status, error) {
+							$("#output").html("<p>Error: " + error + " (" + xhr.status + " " + xhr.statusText + ")</p>");
+						}
+					});
+				});
+			});
+
+			function addCopyButton() {
+				$("<button class='copy-btn'>Copy</button>").appendTo("#output");
+				$(".copy-btn").click(function () {
+					var content = $("#output p").text();
+					copyToClipboard(content);
+				});
+			}
+
+			function copyToClipboard(text) {
+				var dummy = document.createElement("textarea");
+				document.body.appendChild(dummy);
+				dummy.value = text;
+				dummy.select();
+				document.execCommand("copy");
+				document.body.removeChild(dummy);
+			}
+		</script>
+	</div>
+</body>
+
+</html>
